@@ -1,4 +1,10 @@
 use core::mem::size_of;
+#[cfg(target_arch = "x86_64")]
+use std::arch::x86_64::*;
+#[cfg(feature = "sort_keys")]
+use std::collections::BTreeMap;
+
+use std::sync::LazyLock;
 use std::{
     alloc::Layout,
     collections::HashMap,
@@ -15,14 +21,6 @@ use ahash::AHashMap;
 use faststr::FastStr;
 use ref_cast::RefCast;
 use serde::ser::{Serialize, SerializeMap, SerializeSeq};
-#[cfg(feature = "sort_keys")]
-use std::collections::BTreeMap;
-
-#[cfg(target_arch = "x86_64")]
-use std::arch::x86_64::*;
-
-/// Hash index cache for large objects
-use std::sync::LazyLock;
 
 // Type aliases to reduce complexity
 type HashIndex = HashMap<String, usize>;
