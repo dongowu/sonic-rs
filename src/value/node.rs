@@ -4,7 +4,6 @@ use std::arch::x86_64::*;
 #[cfg(feature = "sort_keys")]
 use std::collections::BTreeMap;
 
-use std::sync::LazyLock;
 use std::{
     alloc::Layout,
     collections::HashMap,
@@ -13,7 +12,7 @@ use std::{
     ptr::NonNull,
     slice::from_raw_parts,
     str::from_utf8_unchecked,
-    sync::{Arc, Mutex},
+    sync::{Arc, LazyLock, Mutex},
 };
 
 #[cfg(not(feature = "sort_keys"))]
